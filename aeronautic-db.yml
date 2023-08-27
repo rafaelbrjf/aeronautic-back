@@ -1,0 +1,46 @@
+version: "3.7"
+
+services:
+  postgres:
+    container_name: postgres
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      PADRAO_DB: "padrao"
+    image: postgres:10-alpine
+    hostname: postgres
+    networks:
+      - compose-network
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    # volumes:
+    #   - ./data/postgres:/var/lib/postgresql/data # dados do banco, para nao perder ao parar o compose
+    #   - ./backup/postgres:/var/lib/postgresql/backup # armazenamento de dumps
+    #   - ./scripts/postgres/create_db.sh:/docker-entrypoint-initdb.d/10-create-db.sh # criacao dos bancos adicionais
+    #   - ./scripts/postgres/import_db_dump.sh:/docker-entrypoint-initdb.d/20-import-db-dump.sh # caso tenha algum import de dump, colocar neste script
+    deploy:
+      resources:
+        limits:
+          memory: 400M
+        reservations:
+          memory: 128M
+  pgadmin:
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@fulano.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    image: dpage/pgadmin4:7.3
+    hostname: pgadmin
+    networks:
+      - compose-network
+    ports:
+      - "8182:80"
+    restart: unless-stopped
+    # volumes:
+    #   - ./data/pgadmin:/var/lib/pgadmin # dados de configuracao, para nao perder ao parar o compose
+
+networks:
+  compose-network:
+    driver: bridge
+    name: compose-network
