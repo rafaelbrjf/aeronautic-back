@@ -10,4 +10,6 @@ Para rodar o projeto:
 
 4- Configure o Java e o Maven na máquina, e utilize o comando mvn spring-boot:run para iniciar o servidor.
 
-5- Para rodar localmente o front-end, clonar repositório aeronautic-front, rodar o comando npm i, e depois npm run dev. Se preferir rodar através do deploy, utilizar link https://aeronautic-front.vercel.app/ .
+5- Para informações sobre os Endpoints, acessar o link http://localhost:8080/swagger-ui/index.html .
+
+6- Para rodar localmente o front-end, clonar repositório aeronautic-front, rodar o comando npm i, e depois npm run dev. Se preferir rodar através do deploy, utilizar link https://aeronautic-front.vercel.app/ .
